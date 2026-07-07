@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Trạm chẩn đoán iPhone</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+<div class="scanline" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar__mark">
+    <svg class="topbar__pulse" viewBox="0 0 120 24" aria-hidden="true">
+      <polyline points="0,12 24,12 32,3 40,21 48,12 120,12" />
+    </svg>
+    <span class="topbar__title">TRẠM CHẨN ĐOÁN</span>
+  </div>
+  <button class="btn btn--ghost btn--small" id="btn-history">Lịch sử</button>
+</header>
+
+<main id="app">
+
+  <!-- SCREEN: HOME -->
+  <section class="screen" id="screen-home" data-active="true">
+    <div class="hero">
+      <p class="hero__eyebrow">CHỌN NHÓM SỰ CỐ — 01</p>
+      <h1 class="hero__title">Máy đang gặp vấn đề gì?</h1>
+      <p class="hero__sub">Chọn nhóm phù hợp, hệ thống sẽ chạy kiểm tra trực tiếp trên máy này rồi hỏi thêm vài câu để chẩn đoán chính xác hơn.</p>
+    </div>
+    <div class="category-grid">
+      <button class="category-card" data-category="hardware">
+        <span class="category-card__icon">⚙</span>
+        <span class="category-card__label">Phần cứng</span>
+        <span class="category-card__hint">Pin, màn hình, loa/mic, camera</span>
+      </button>
+      <button class="category-card" data-category="software">
+        <span class="category-card__icon">◈</span>
+        <span class="category-card__label">Phần mềm</span>
+        <span class="category-card__hint">Treo máy, crash app, update, mạng, nghi virus</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- SCREEN: PROBLEM LIST -->
+  <section class="screen" id="screen-problems">
+    <p class="eyebrow">CHỌN SỰ CỐ CỤ THỂ — 02</p>
+    <h2 class="screen__title" id="problems-title">—</h2>
+    <div class="problem-grid" id="problem-grid"></div>
+    <button class="btn btn--ghost" data-back="screen-home">← Quay lại</button>
+  </section>
+
+  <!-- SCREEN: AUTO TEST -->
+  <section class="screen" id="screen-test">
+    <p class="eyebrow">KIỂM TRA TỰ ĐỘNG — 03</p>
+    <h2 class="screen__title" id="test-title">—</h2>
+    <div class="test-panel" id="test-panel"></div>
+    <div class="screen__actions">
+      <button class="btn btn--ghost" data-back="screen-problems">← Quay lại</button>
+      <button class="btn btn--primary" id="btn-continue-tree">Tiếp tục chẩn đoán →</button>
+    </div>
+  </section>
+
+  <!-- SCREEN: DECISION TREE -->
+  <section class="screen" id="screen-tree">
+    <p class="eyebrow">TRẢ LỜI CÂU HỎI — 04</p>
+    <div class="trail" id="trail"></div>
+    <h2 class="question" id="question-text">—</h2>
+    <div class="option-list" id="option-list"></div>
+  </section>
+
+  <!-- SCREEN: REPORT -->
+  <section class="screen" id="screen-report">
+    <p class="eyebrow">KẾT QUẢ CHẨN ĐOÁN — 05</p>
+    <div class="report-card" id="report-card">
+      <div class="report-card__badge" id="report-severity">—</div>
+      <h2 class="report-card__title" id="report-title">—</h2>
+      <p class="report-card__explanation" id="report-explanation">—</p>
+      <div class="report-card__steps">
+        <p class="report-card__steps-label">Các bước xử lý đề xuất</p>
+        <ol id="report-steps"></ol>
+      </div>
+      <div class="report-card__service" id="report-service" hidden>
+        ⚠ Trường hợp này nên mang máy đến cơ sở bảo hành / sửa chữa uy tín để kiểm tra sâu hơn.
+      </div>
+    </div>
+    <div class="screen__actions">
+      <button class="btn btn--ghost" data-back="screen-home">Chẩn đoán vấn đề khác</button>
+    </div>
+  </section>
+
+  <!-- SCREEN: HISTORY -->
+  <section class="screen" id="screen-history">
+    <p class="eyebrow">NHẬT KÝ</p>
+    <h2 class="screen__title">Các lần chẩn đoán gần đây</h2>
+    <div class="history-table" id="history-table"></div>
+    <button class="btn btn--ghost" data-back="screen-home">← Quay lại</button>
+  </section>
+
+</main>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
